@@ -2,30 +2,30 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.mybatis.example.BlogMapper">
+<mapper namespace="com.seckill.dao.SeckillDao">
 
 	<update id="reduceNumber">
 		update 
 			seckill
 		set 
 			number = number - 1
-		where seckillId = #{skillId}
-		and start_time <![CDATA[<=]]> #{skillId}
-		and end_time >= #{skillId}
+		where seckill_id = #{seckillId}
+		and start_time <![CDATA[<=]]> #{killTime}
+		and end_time >= #{killTime}
 		and number > 0;
 	</update>
 	
 	<select id="queryById" resultType="Seckill" parameterType="long" >
 		select seckill_id,name,number,start_time,end_time,create_time
 		from seckill
-		where seckill_id = #{skillId};
+		where seckill_id = #{seckillId}
 	</select>
 	
 	<select id="queryAll" resultType="Seckill">
 		select seckill_id,name,number,start_time,end_time,create_time
-		from seckill 
+		from seckill
 		order by create_time desc
-		limt #{offset},#{limit};
+		limit #{offset},#{limit};
 	</select>
 	
 </mapper>

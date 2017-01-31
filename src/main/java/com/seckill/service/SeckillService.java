@@ -34,6 +34,16 @@ public interface SeckillService {
 	 * @return
 	 */
 	Exposer exportSeckillUrl(long seckillId);
+	/**
+	 * 秒杀成功
+	 * @param seckillId
+	 * @param userphone
+	 * @param md5
+	 * @return
+	 * @throws SeckillException
+	 * @throws RepeatkillException
+	 * @throws SeckillCloseException
+	 */
 	SeckillExecution excuteSeckill(long seckillId, long userphone, String md5) 
 			throws SeckillException,RepeatkillException,SeckillCloseException;
 }

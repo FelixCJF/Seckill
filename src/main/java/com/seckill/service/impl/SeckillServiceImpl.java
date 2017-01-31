@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import com.seckill.dao.SeckillDao;
@@ -21,6 +24,8 @@ import com.seckill.pojo.SeckillExecution;
 import com.seckill.service.SeckillService;
 @Service
 public class SeckillServiceImpl implements SeckillService {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+			
 	
 	@Autowired//spring提供
 	private SeckillDao seckillDao;
@@ -28,7 +33,7 @@ public class SeckillServiceImpl implements SeckillService {
 	@Resource//j2ee提供的注解
 	private SuccessKilledDao successKilledDao;
 	
-	private String slat;//盐值，混淆md5
+	private String slat = "sjklsndflsadfklsagk&**(";//盐值，混淆md5
 	
 	@Override
 	public List<Seckill> getSeckills() {
@@ -50,8 +55,8 @@ public class SeckillServiceImpl implements SeckillService {
 		Date end_time = seckill.getEndTime();
 		//当前系统时间
 		Date now_time = new Date();
-		if (start_time.getTime() < now_time.getTime() 
-				|| end_time.getTime() > now_time.getTime()) {
+		if (start_time.getTime() > now_time.getTime() 
+				|| end_time.getTime() < now_time.getTime()) {
 			return new Exposer(false, seckillId, now_time.getTime(), start_time.getTime(), end_time.getTime());
 		}
 		//转化特定字符串过程，不可逆
@@ -67,11 +72,12 @@ public class SeckillServiceImpl implements SeckillService {
 	}
 
 	@Override
+	@Transactional
 	public SeckillExecution excuteSeckill(long seckillId, long userphone,
 			String md5) throws SeckillException, RepeatkillException,
 			SeckillCloseException {
 		try {
-			if (md5 == null || md5.equals(getMD5(seckillId))) {
+			if (md5 == null || !md5.equals(getMD5(seckillId))) {
 				throw new SeckillException("seckill data rewrite");
 			}
 			//秒杀逻辑：减库存，记录购买行为

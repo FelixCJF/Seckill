@@ -11,10 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.seckill.domain.Seckill;
+import com.seckill.dto.Exposer;
+import com.seckill.dto.SeckillExecution;
 import com.seckill.exception.RepeatkillException;
 import com.seckill.exception.SeckillCloseException;
-import com.seckill.pojo.Exposer;
-import com.seckill.pojo.SeckillExecution;
 import com.seckill.service.SeckillService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

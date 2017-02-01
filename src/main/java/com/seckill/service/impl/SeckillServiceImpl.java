@@ -16,11 +16,12 @@ import com.seckill.dao.SeckillDao;
 import com.seckill.dao.SuccessKilledDao;
 import com.seckill.domain.Seckill;
 import com.seckill.domain.SuccessKilled;
+import com.seckill.dto.Exposer;
+import com.seckill.dto.SeckillExecution;
+import com.seckill.enums.SeckillStateEnum;
 import com.seckill.exception.RepeatkillException;
 import com.seckill.exception.SeckillCloseException;
 import com.seckill.exception.SeckillException;
-import com.seckill.pojo.Exposer;
-import com.seckill.pojo.SeckillExecution;
 import com.seckill.service.SeckillService;
 @Service
 public class SeckillServiceImpl implements SeckillService {
@@ -94,7 +95,7 @@ public class SeckillServiceImpl implements SeckillService {
 				}else {
 					//秒杀成功
 					SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId, userphone);
-					return new SeckillExecution(seckillId, 1, "秒杀成功",successKilled);
+					return new SeckillExecution(seckillId, SeckillStateEnum.SUCCESS,successKilled);
 				}
 			}
 		} catch(SeckillCloseException e1){

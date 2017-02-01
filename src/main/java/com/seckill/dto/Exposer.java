@@ -1,4 +1,4 @@
-package com.seckill.pojo;
+package com.seckill.dto;
 /**
  * 暴露秒杀地址的POJO
  * @author aspire

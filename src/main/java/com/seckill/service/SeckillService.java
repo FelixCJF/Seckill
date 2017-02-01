@@ -3,11 +3,11 @@ package com.seckill.service;
 import java.util.List;
 
 import com.seckill.domain.Seckill;
+import com.seckill.dto.Exposer;
+import com.seckill.dto.SeckillExecution;
 import com.seckill.exception.RepeatkillException;
 import com.seckill.exception.SeckillCloseException;
 import com.seckill.exception.SeckillException;
-import com.seckill.pojo.Exposer;
-import com.seckill.pojo.SeckillExecution;
 
 /**
  * 秒杀接口
